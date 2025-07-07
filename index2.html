@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>1 สัปดาห์ก่อนสอบ!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+    body {
+      font-family: 'Kanit', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 5px;
+    }
+    #stats, #shop, #log, #summary {
+      background: #ffffffcc;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      font-size: 14px;
+    }
+    #summary {
+      display: none;
+      white-space: pre-line;
+      min-height: 150px;
+    }
+    .card, .item {
+      display: inline-block;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin: 10px;
+      width: 180px;
+      transition: transform 0.2s;
+      cursor: pointer;
+      text-align: center;
+    }
+    .card:hover, .item:hover {
+      transform: scale(1.05);
+    }
+    .card h3, .item h4 {
+      margin: 0 0 10px;
+    }
+    .card p, .item p {
+      font-size: 14px;
+      color: #333;
+    }
+    #dayDisplay {
+      font-size: 20px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    button {
+      font-family: 'Kanit', sans-serif;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background: #4caf50;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      background: #388e3c;
+    }
+    .time-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .time-section h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎓 1 สัปดาห์ก่อนสอบ!</h1>
+
+  <div id="stats">
+    <p>📅 วันที่: <span id="day">1</span> / 7</p>
+    <p>🕒 ช่วงเวลา: <span id="time">เช้า</span></p>
+    <p>⚡ พลังงาน: <span id="energy">100</span></p>
+    <p>😰 ความเครียด: <span id="stress">0</span></p>
+    <p>📚 ความรู้: <span id="knowledge">0</span></p>
+    <p>💰 เงิน: <span id="money">500</span> บาท</p>
+    <p>🛋️ การตกแต่ง: <span id="decoration">ไม่มี</span></p>
+    <p>🎯 โชควันนี้: <span id="luck">ปกติ</span></p>
+  </div>
+
+  <div id="dayDisplay">เลือกกิจกรรมของวันที่ 1 (ช่วงเช้า)</div>
+
+  <div class="time-section" id="activities">
+    <h2>กิจกรรม</h2>
+    <div class="card" onclick="doAction('study')">
+      <h3>📖 อ่านเนื้อหาสรุป</h3>
+      <p>+6 ความรู้, -10 พลังงาน, +5 เครียด</p>
+    </div>
+    <div class="card" onclick="doAction('group')">
+      <h3>👨‍👩‍👧‍👦 อ่านกลุ่มกับเพื่อน</h3>
+      <p>+8 ความรู้, -8 พลังงาน, +4 เครียด</p>
+    </div>
+    <div class="card" onclick="doAction('exercise')">
+      <h3>🏃‍♂️ วิ่งออกกำลังกาย</h3>
+      <p>+12 พลังงาน, -6 เครียด</p>
+    </div>
+    <div class="card" onclick="doAction('parttime')">
+      <h3>💼 ไปช่วยงานร้าน</h3>
+      <p>+100 บาท, -20 พลังงาน, +6 เครียด</p>
+    </div>
+    <div class="card" onclick="doAction('relax')">
+      <h3>🧘 ผ่อนคลายจิตใจ</h3>
+      <p>-12 เครียด, +8 พลังงาน</p>
+    </div>
+    <div class="card" onclick="doAction('lottery')">
+      <h3>🎟️ เสี่ยงดวงรายวัน</h3>
+      <p>ใช้เงิน 50 บาท ลุ้นรับเงินหรือเสียพลังงาน</p>
+    </div>
+    <div class="card" onclick="doAction('cook')">
+      <h3>🍳 ทำอาหารกินเอง</h3>
+      <p>+5 พลังงาน, -2 เครียด, -20 บาท</p>
+    </div>
+    <div class="card" onclick="doAction('readFiction')">
+      <h3>📚 อ่านนิยาย</h3>
+      <p>-6 เครียด, +2 ความรู้</p>
+    </div>
+  </div>
+
+  <div id="shop">
+    <h3>🛒 ร้านตกแต่งห้อง</h3>
+    <div class="item" onclick="buyDecoration('พรมวิเศษ', 150)">
+      <h4>🧺 พรมวิเศษ</h4>
+      <p>ลดเครียดเล็กน้อยทุกวัน<br>ราคา 150 บาท</p>
+    </div>
+    <div class="item" onclick="buyDecoration('โต๊ะอ่านหนังสือ', 250)">
+      <h4>📚 โต๊ะอ่านหนังสือ</h4>
+      <p>เพิ่มความรู้ +1 เมื่ออ่านหนังสือ<br>ราคา 250 บาท</p>
+    </div>
+    <div class="item" onclick="buyDecoration('ต้นไม้ตั้งโต๊ะ', 180)">
+      <h4>🌿 ต้นไม้ตั้งโต๊ะ</h4>
+      <p>ลดเครียดเพิ่ม 1 หน่วยทุกวัน<br>ราคา 180 บาท</p>
+    </div>
+    <div class="item" onclick="buyDecoration('โคมไฟ LED', 200)">
+      <h4>💡 โคมไฟ LED</h4>
+      <p>เพิ่มพลังงาน 1 หน่วยทุกวัน<br>ราคา 200 บาท</p>
+    </div>
+  </div>
+
+  <div id="log">ระบบพร้อมใช้งาน</div>
+
+  <div id="summary"></div>
+
+  <button onclick="restartGame()">🔁 เริ่มใหม่</button>
+
+<script>
+  let money = 500;
+  let energy = 100;
+  let stress = 0;
+  let knowledge = 0;
+  let decoration = "ไม่มี";
+
+  let day = 1;
+  const maxDay = 7;
+  const timePeriods = ["เช้า", "บ่าย", "เย็น"];
+  let timeIndex = 0;
+
+  // สถานะการตกแต่งมีผลเพิ่มแบบง่าย
+  function applyDecorationEffects() {
+    switch(decoration) {
+      case "พรมวิเศษ":
+        if(stress > 0) stress -= 1; // ลดเครียดเล็กน้อยทุกวัน
+        break;
+      case "ต้นไม้ตั้งโต๊ะ":
+        if(stress > 0) stress -= 1; // ลดเครียดเพิ่มอีก 1 หน่วยทุกวัน
+        break;
+      case "โคมไฟ LED":
+        energy += 1; // เพิ่มพลังงาน 1 หน่วยทุกวัน
+        break;
+      case "โต๊ะอ่านหนังสือ":
+        // เพิ่มความรู้ +1 เมื่ออ่านหนังสือ (ทำใน doAction)
+        break;
+    }
+    // ไม่ให้ติดลบ
+    if(stress < 0) stress = 0;
+  }
+
+  function updateStats() {
+    document.getElementById("money").textContent = money;
+    document.getElementById("energy").textContent = energy;
+    document.getElementById("stress").textContent = stress;
+    document.getElementById("knowledge").textContent = knowledge;
+    document.getElementById("decoration").textContent = decoration;
+  }
+
+  function updateDayTimeDisplay() {
+    document.getElementById("day").textContent = day;
+    document.getElementById("time").textContent = timePeriods[timeIndex];
+    document.getElementById("dayDisplay").textContent = `เลือกกิจกรรมของวันที่ ${day} (ช่วง${timePeriods[timeIndex]})`;
+  }
+
+  function logMessage(msg) {
+    const log = document.getElementById("log");
+    log.textContent = msg;
+  }
+
+  function nextTimePeriod() {
+    timeIndex++;
+    if (timeIndex >= timePeriods.length) {
+      timeIndex = 0;
+      day++;
+      if (day > maxDay) {
+        showSummary();
+        return false;
+      }
+    }
+    updateDayTimeDisplay();
+    return true;
+  }
+
+  function doAction(action) {
+    let msg = "";
+    switch(action) {
+      case "study":
+        energy -= 10;
+        stress += 5;
+        knowledge += 6;
+        if(decoration === "โต๊ะอ่านหนังสือ") knowledge += 1;
+        msg = "อ่านเนื้อหาสรุป +6 ความรู้, -10 พลังงาน, +5 เครียด";
+        if(decoration === "โต๊ะอ่านหนังสือ") msg += " (+1 ความรู้จากโต๊ะอ่านหนังสือ)";
+        break;
+      case "group":
+        energy -= 8;
+        stress += 4;
+        knowledge += 8;
+        if(decoration === "โต๊ะอ่านหนังสือ") knowledge += 1;
+        msg = "อ่านกลุ่มกับเพื่อน +8 ความรู้, -8 พลังงาน, +4 เครียด";
+        if(decoration === "โต๊ะอ่านหนังสือ") msg += " (+1 ความรู้จากโต๊ะอ่านหนังสือ)";
+        break;
+      case "exercise":
+        energy += 12;
+        stress -= 6;
+        msg = "วิ่งออกกำลังกาย +12 พลังงาน, -6 เครียด";
+        break;
+      case "parttime":
+        energy -= 20;
+        stress += 6;
+        money += 100;
+        msg = "ไปช่วยงานร้าน +100 บาท, -20 พลังงาน, +6 เครียด";
+        break;
+      case "relax":
+        stress -= 12;
+        energy += 8;
+        msg = "ผ่อนคลายจิตใจ -12 เครียด, +8 พลังงาน";
+        break;
+      case "lottery":
+        if(money < 50) {
+          msg = "เงินไม่พอสำหรับเสี่ยงดวง 50 บาท!";
+          break;
+        }
+        money -= 50;
+        if(Math.random() < 0.5) {
+          let prize = 100 + Math.floor(Math.random() * 201);
+          money += prize;
+          msg = `เสี่ยงดวงได้ ${prize} บาท!`;
+        } else {
+          energy -= 10;
+          msg = "เสี่ยงดวงเสียพลังงาน 10 หน่วย!";
+        }
+        break;
+      case "cook":
+        energy += 5;
+        stress -= 2;
+        money -= 20;
+        msg = "ทำอาหารกินเอง +5 พลังงาน, -2 เครียด, -20 บาท";
+        break;
+      case "readFiction":
+        stress -= 6;
+        knowledge += 2;
+        if(decoration === "โต๊ะอ่านหนังสือ") knowledge += 1;
+        msg = "อ่านนิยาย -6 เครียด, +2 ความรู้";
+        if(decoration === "โต๊ะอ่านหนังสือ") msg += " (+1 ความรู้จากโต๊ะอ่านหนังสือ)";
+        break;
+      default:
+        msg = "กิจกรรมไม่รู้จัก";
+    }
+
+    // ปรับขอบเขตค่าต่าง ๆ
+    if(energy < 0) energy = 0;
+    if(stress < 0) stress = 0;
+    if(knowledge < 0) knowledge = 0;
+    if(money < 0) money = 0;
+
+    // เพิ่มผลจากของตกแต่งทุกวัน (หลังกิจกรรม)
+    applyDecorationEffects();
+
+    updateStats();
+    logMessage(msg);
+
+    nextTimePeriod();
+  }
+
+  function buyDecoration(item, price) {
+    if (decoration !== "ไม่มี") {
+      alert("คุณมีของตกแต่งอยู่แล้ว!");
+      return;
+    }
+    if (money < price) {
+      alert("เงินไม่พอ!");
+      return;
+    }
+    money -= price;
+    decoration = item;
+    updateStats();
+    alert("คุณซื้อ " + item + " เรียบร้อยแล้ว!");
+    logMessage("ซื้อของตกแต่ง: " + item);
+  }
+
+  function restartGame() {
+    location.reload();
+  }
+
+  function showSummary() {
+    // ซ่อนส่วนอื่น ๆ ของเกม
+    document.getElementById("stats").style.display = "none";
+    document.getElementById("dayDisplay").style.display = "none";
+    document.querySelector(".time-section").style.display = "none";
+    document.getElementById("shop").style.display = "none";
+    document.getElementById("log").style.display = "none";
+
+    const summary = document.getElementById("summary");
+    summary.style.display = "block";
+
+    let performance = "";
+
+    if (knowledge >= 50) {
+      performance = "ยอดเยี่ยม! คุณเตรียมตัวสอบได้ดีมาก 🎉";
+    } else if (knowledge >= 30) {
+      performance = "ดีมาก! คุณเตรียมตัวได้พอสมควร 👍";
+    } else {
+      performance = "ควรฝึกฝนเพิ่มนะครับ! 📚";
+    }
+
+    summary.textContent = 
+      `🎓 สรุปผลหลัง 7 วันก่อนสอบ:\n\n` +
+      `ความรู้: ${knowledge}\n` +
+      `พลังงาน: ${energy}\n` +
+      `ความเครียด: ${stress}\n` +
+      `เงิน: ${money} บาท\n` +
+      `ของตกแต่ง: ${decoration}\n\n` +
+      performance;
+  }
+
+  // เริ่มต้นอัปเดต UI แสดงวันและช่วงเวลา
+  updateDayTimeDisplay();
+  updateStats();
+</script>
+</body>
+</html>
